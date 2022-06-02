@@ -20,8 +20,7 @@ class ProviderController extends Controller
     {
         $providers = Provider::paginate();
 
-        return view('provider.index', compact('providers'))
-            ->with('i', (request()->input('page', 1) - 1) * $providers->perPage());
+        return view('provider.index', compact('providers'));
     }
 
     /**

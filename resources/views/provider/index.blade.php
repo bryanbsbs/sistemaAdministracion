@@ -38,9 +38,9 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Razonsocial</th>
+										<th>Razon social</th>
 										<th>Persona</th>
-										<th>Rfc</th>
+										<th>RFC</th>
 										<th>Domicilio</th>
 										<th>Email</th>
 										<th>Telefono</th>
@@ -51,23 +51,16 @@
                                 <tbody>
                                     @foreach ($providers as $provider)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-
+                                            <td>{{ $provider->id }}</td>
 											<td>{{ $provider->razonSocial }}</td>
 											<td>{{ $provider->persona }}</td>
 											<td>{{ $provider->rfc }}</td>
 											<td>{{ $provider->domicilio }}</td>
 											<td>{{ $provider->email }}</td>
 											<td>{{ $provider->telefono }}</td>
-
                                             <td>
-                                                <form action="{{ route('providers.destroy',$provider->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('providers.show',$provider->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('providers.edit',$provider->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                                                </form>
+                                                <a class="btn btn-sm btn-primary " href="{{ route('providers.show',$provider->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                <a class="btn btn-sm btn-success" href="{{ route('providers.edit',$provider->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach

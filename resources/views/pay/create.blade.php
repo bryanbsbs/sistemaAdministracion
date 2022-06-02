@@ -1,8 +1,11 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Create Pay
-@endsection
+@section('title', 'Crear pago')
+
+@section('content_header')
+    <h1>Crear pago</h1>
+@stop
+
 
 @section('content')
     <section class="content container-fluid">

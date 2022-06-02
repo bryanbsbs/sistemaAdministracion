@@ -20,8 +20,7 @@ class CostumerController extends Controller
     {
         $costumers = Costumer::paginate();
 
-        return view('costumer.index', compact('costumers'))
-            ->with('i', (request()->input('page', 1) - 1) * $costumers->perPage());
+        return view('costumer.index', compact('costumers'));
     }
 
     /**

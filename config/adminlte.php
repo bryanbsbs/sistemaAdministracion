@@ -237,7 +237,17 @@ return [
             'route'  => 'home',
             'icon'  => 'fas fa-fw fa-home',
         ],
-        ['header' => 'CRUDS'],
+        ['header' => 'ADMINISTRACIÓN'],
+        [
+            'text' => 'Pagos',
+            'route'  => 'pays.index',
+            'icon' => 'fas fa-fw fa-coins',
+        ],
+        [
+            'text' => 'Anticipos',
+            'route'  => 'advances.index',
+            'icon' => 'fas fa-fw fa-coins',
+        ],
         [
             'text' => 'Proyectos',
             'route'  => 'projects.index',
@@ -252,16 +262,6 @@ return [
             'text' => 'Proveedores',
             'route'  => 'providers.index',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Pagos',
-            'route'  => 'pays.index',
-            'icon' => 'fas fa-fw fa-coins',
-        ],
-        [
-            'text' => 'Anticipos',
-            'route'  => 'advances.index',
-            'icon' => 'fas fa-fw fa-coins',
         ],
         ['header' => 'labels'],
         [

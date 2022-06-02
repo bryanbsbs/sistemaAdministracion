@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Update Costumer
-@endsection
+@section('title', 'Editar cliente')
+
+@section('content_header')
+    <h1>Editar cliente</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -12,16 +14,11 @@
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Update Costumer</span>
-                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('costumers.update', $costumer->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
-
                             @include('costumer.form')
-
                         </form>
                     </div>
                 </div>

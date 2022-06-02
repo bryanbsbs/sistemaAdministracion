@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Create Advance
-@endsection
+@section('title', 'Crear anticipo')
+
+@section('content_header')
+    <h1>Crear anticipo</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">

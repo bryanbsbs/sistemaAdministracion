@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Create Costumer
-@endsection
+@section('title', 'Crear cliente')
+
+@section('content_header')
+    <h1>Crear cliente</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -12,15 +14,10 @@
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Create Costumer</span>
-                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('costumers.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
-
                             @include('costumer.form')
-
                         </form>
                     </div>
                 </div>

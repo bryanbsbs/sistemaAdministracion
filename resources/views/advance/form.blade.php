@@ -1,35 +1,39 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
+        <div class="mb-3">
+            <label for="costumer_id">Cliente</label>
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="costumer_id" name="costumer_id">
+                @foreach ($costumers as $costumer)
+                    <option value="{{ $costumer->id }}" selected>{{ $costumer->razonSocial }}</option>
+                @endforeach
+            </select><br>
+        </div>
+
+        <div class="mb-3">
+            <label for="project_id">Proyecto</label>
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="project_id" name="project_id">
+                @foreach ($projects as $project)
+                    <option value="{{ $project->id }}" selected>{{ $project->nombre }}</option>
+                @endforeach
+            </select><br>
+        </div>
+
         <div class="form-group">
-            {{ Form::label('costumer_id') }}
-            {{ Form::text('costumer_id', $advance->costumer_id, ['class' => 'form-control' . ($errors->has('costumer_id') ? ' is-invalid' : ''), 'placeholder' => 'Costumer Id']) }}
-            {!! $errors->first('costumer_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="monto" class="form-label">Monto</label>
+            <input type="text" name="monto" class="form-control" id="monto" value="{{ old("monto", $advance->monto) }}" required>
         </div>
         <div class="form-group">
-            {{ Form::label('project_id') }}
-            {{ Form::text('project_id', $advance->project_id, ['class' => 'form-control' . ($errors->has('project_id') ? ' is-invalid' : ''), 'placeholder' => 'Project Id']) }}
-            {!! $errors->first('project_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="text" name="fecha" class="form-control" id="fecha" value="{{ old("fecha", $advance->fecha) }}" required>
         </div>
         <div class="form-group">
-            {{ Form::label('monto') }}
-            {{ Form::text('monto', $advance->monto, ['class' => 'form-control' . ($errors->has('monto') ? ' is-invalid' : ''), 'placeholder' => 'Monto']) }}
-            {!! $errors->first('monto', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="metodo" class="form-label">Metodo</label>
+            <input type="text" name="metodo" class="form-control" id="metodo" value="{{ old("metodo", $advance->metodo) }}" required>
         </div>
         <div class="form-group">
-            {{ Form::label('fecha') }}
-            {{ Form::text('fecha', $advance->fecha, ['class' => 'form-control' . ($errors->has('fecha') ? ' is-invalid' : ''), 'placeholder' => 'Fecha']) }}
-            {!! $errors->first('fecha', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('metodo') }}
-            {{ Form::text('metodo', $advance->metodo, ['class' => 'form-control' . ($errors->has('metodo') ? ' is-invalid' : ''), 'placeholder' => 'Metodo']) }}
-            {!! $errors->first('metodo', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('referencia') }}
-            {{ Form::text('referencia', $advance->referencia, ['class' => 'form-control' . ($errors->has('referencia') ? ' is-invalid' : ''), 'placeholder' => 'Referencia']) }}
-            {!! $errors->first('referencia', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="referencia" class="form-label">Referencia</label>
+            <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old("referencia", $advance->referencia) }}" required>
         </div>
 
     </div>

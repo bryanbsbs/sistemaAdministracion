@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pay;
+use App\Models\Provider;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 /**
@@ -20,8 +22,7 @@ class PayController extends Controller
     {
         $pays = Pay::paginate();
 
-        return view('pay.index', compact('pays'))
-            ->with('i', (request()->input('page', 1) - 1) * $pays->perPage());
+        return view('pay.index', compact('pays'));
     }
 
     /**
@@ -31,8 +32,12 @@ class PayController extends Controller
      */
     public function create()
     {
+        $providers = Provider::all();
+        $projects = Project::all();
         $pay = new Pay();
-        return view('pay.create', compact('pay'));
+        return view('pay.create', [ 'pay' => $pay,
+                                    'projects' => $projects,
+                                    'providers' => $providers ]);
     }
 
     /**
@@ -44,7 +49,6 @@ class PayController extends Controller
     public function store(Request $request)
     {
         request()->validate(Pay::$rules);
-
         $pay = Pay::create($request->all());
 
         return redirect()->route('pays.index')
@@ -74,7 +78,9 @@ class PayController extends Controller
     {
         $pay = Pay::find($id);
 
-        return view('pay.edit', compact('pay'));
+        return view('pay.edit', ['pay' => $pay,
+                                'projects' => $projects,
+                                'providers' => $providers ]);
     }
 
     /**

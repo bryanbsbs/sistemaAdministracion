@@ -12,17 +12,10 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('advances.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
+                        <div class="float-right">
+                        <a href="{{ route('advances.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                            {{ __('Create New') }}
+                        </a>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -37,29 +30,25 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-										<th>Costumer Id</th>
-										<th>Project Id</th>
+										<th>Cliente</th>
+										<th>Proyecto</th>
 										<th>Monto</th>
 										<th>Fecha</th>
 										<th>Metodo</th>
 										<th>Referencia</th>
-
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($advances as $advance)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-
+                                            <td>{{ $advance->id }}</td>
 											<td>{{ $advance->costumer_id }}</td>
 											<td>{{ $advance->project_id }}</td>
 											<td>{{ $advance->monto }}</td>
 											<td>{{ $advance->fecha }}</td>
 											<td>{{ $advance->metodo }}</td>
 											<td>{{ $advance->referencia }}</td>
-
                                             <td>
                                                 <form action="{{ route('advances.destroy',$advance->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('advances.show',$advance->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>

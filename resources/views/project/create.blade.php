@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Create Project
-@endsection
+@section('title', 'Crear proyecto')
+
+@section('content_header')
+    <h1>Crear proyecto</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -12,15 +14,10 @@
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Create Project</span>
-                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('projects.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
-
                             @include('project.form')
-
                         </form>
                     </div>
                 </div>

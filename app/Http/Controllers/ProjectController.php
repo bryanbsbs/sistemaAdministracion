@@ -20,8 +20,7 @@ class ProjectController extends Controller
     {
         $projects = Project::paginate();
 
-        return view('project.index', compact('projects'))
-            ->with('i', (request()->input('page', 1) - 1) * $projects->perPage());
+        return view('project.index', compact('projects'));
     }
 
     /**
@@ -43,9 +42,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $subtotal = request()->subtotal;
+        $iva = doubleval($subtotal) * 0.16;
+        $total = $iva + doubleval($subtotal);
+
         request()->validate(Project::$rules);
 
-        $project = Project::create($request->all());
+        $project = Project::create($request->all() + ['iva' => $iva, 'total' => $total]);
 
         return redirect()->route('projects.index')
             ->with('success', 'Project created successfully.');

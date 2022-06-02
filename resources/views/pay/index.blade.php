@@ -12,17 +12,10 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('pays.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
+                        <div class="float-right">
+                        <a href="{{ route('pays.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                            {{ __('Crear nuevo') }}
+                        </a>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -38,21 +31,20 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Provider Id</th>
-										<th>Project Id</th>
+										<th>Provider</th>
+										<th>Project</th>
 										<th>Monto</th>
 										<th>Fecha</th>
 										<th>Metodo</th>
 										<th>Referencia</th>
 
-                                        <th></th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($pays as $pay)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-
+                                            <td>{{ $pay->id }}</td>
 											<td>{{ $pay->provider_id }}</td>
 											<td>{{ $pay->project_id }}</td>
 											<td>{{ $pay->monto }}</td>

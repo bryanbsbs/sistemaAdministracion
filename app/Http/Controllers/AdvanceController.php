@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advance;
+use App\Models\Costumer;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 /**
@@ -20,8 +22,7 @@ class AdvanceController extends Controller
     {
         $advances = Advance::paginate();
 
-        return view('advance.index', compact('advances'))
-            ->with('i', (request()->input('page', 1) - 1) * $advances->perPage());
+        return view('advance.index', compact('advances'));
     }
 
     /**
@@ -31,8 +32,12 @@ class AdvanceController extends Controller
      */
     public function create()
     {
+        $costumers = Costumer::all();
+        $projects = Project::all();
         $advance = new Advance();
-        return view('advance.create', compact('advance'));
+        return view('advance.create', [ 'advance' => $advance,
+                                        'projects' => $projects,
+                                        'costumers' => $costumers ]);
     }
 
     /**
@@ -72,9 +77,12 @@ class AdvanceController extends Controller
      */
     public function edit($id)
     {
+        $costumers = Costumer::all();
+        $projects = Project::all();
         $advance = Advance::find($id);
-
-        return view('advance.edit', compact('advance'));
+        return view('advance.edit', ['advance' => $advance,
+                                     'projects' => $projects,
+                                     'costumers' => $costumers ]);
     }
 
     /**

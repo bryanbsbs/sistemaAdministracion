@@ -25,13 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Project extends Model
 {
-    
+
     static $rules = [
 		'nombre' => 'required',
 		'fechaInicio' => 'required',
 		'subtotal' => 'required',
-		'iva' => 'required',
-		'total' => 'required',
 		'concepto' => 'required',
 		'comentariosAdicionales' => 'required',
     ];
@@ -53,7 +51,7 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Advance', 'project_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,6 +59,6 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Pay', 'project_id', 'id');
     }
-    
+
 
 }
