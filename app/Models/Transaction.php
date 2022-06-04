@@ -4,24 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Pay
- *
- * @property $id
- * @property $provider_id
- * @property $project_id
- * @property $monto
- * @property $fecha
- * @property $metodo
- * @property $referencia
- * @property $created_at
- * @property $updated_at
- *
- * @property Project $project
- * @property Provider $provider
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Transaction extends Model
 {
 
@@ -40,11 +22,11 @@ class Transaction extends Model
 
     public function project()
     {
-        return $this->hasOne('App\Models\Project', 'id', 'project_id');
+        return $this->belongsTo(Project::class);
     }
 
     public function person()
     {
-        return $this->hasOne('App\Models\Person', 'id', 'person_id');
+        return $this->belongsTo(Person::class);
     }
 }

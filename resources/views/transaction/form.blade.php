@@ -3,7 +3,7 @@
 
         <div class="mb-3">
             <label for="person_id">Persona</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="person_id" name="person_id">
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="person_id" name="person_id" required>
                 <option value="">Seleccione una opción</option>
                 @foreach ($persons as $person)
                     <option value="{{ $person->id }}" @if($transaction->person_id == $person->id) {{ 'selected' }} @endif>{{ $person->razonSocial }}</option>
@@ -13,7 +13,7 @@
 
         <div class="mb-3">
             <label for="project_id">Proyecto</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="project_id" name="project_id">
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="project_id" name="project_id" required>
                 <option value="">Seleccione una opción</option>
                 @foreach ($projects as $project)
                     <option value="{{ $project->id }}" @if($transaction->project_id == $project->id) {{ 'selected' }} @endif>{{ $project->nombre }}</option>
@@ -31,7 +31,7 @@
         </div>
         <div class="mb-3">
             <label for="metodo">Metodo</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="metodo" name="metodo">
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="metodo" name="metodo" required>
                     <option value="">Selecciona una opcion</option>
                     <option value="Deposito" @if($transaction->metodo == 'Deposito') {{ 'selected' }} @endif>Deposito</option>
                     <option value="Transferencia" @if($transaction->metodo == 'Transferencia') {{ 'selected' }} @endif>Transferencia</option>

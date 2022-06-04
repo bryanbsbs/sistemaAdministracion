@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('projects.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('projects.index') }}"> Regresar</a>
                         </div>
                     </div>
 
@@ -42,11 +42,11 @@
                             {{ $project->total }}
                         </div>
                         <div class="form-group">
-                            <strong>Progreso del pago al proveedor:</strong>
+                            <strong>Pago al proveedor:</strong>
                             {{ $project->progresoPago }}
                         </div>
                         <div class="form-group">
-                            <strong>Progreso del los anticipos del cliente:</strong>
+                            <strong>Anticipos del cliente:</strong>
                             {{ $project->progresoAnticipo }}
                         </div>
                         <div class="form-group">
@@ -58,7 +58,7 @@
                             {{ $project->concepto }}
                         </div>
                         <div class="form-group">
-                            <strong>Comentariosadicionales:</strong>
+                            <strong>Comentarios adicionales:</strong>
                             {{ $project->comentariosAdicionales }}
                         </div>
 

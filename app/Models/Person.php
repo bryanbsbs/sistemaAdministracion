@@ -22,6 +22,6 @@ class Person extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\Models\Transaction', 'person_id', 'id');
+        return $this->hasMany(Transaction::class);
     }
 }

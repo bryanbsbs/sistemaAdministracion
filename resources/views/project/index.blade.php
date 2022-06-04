@@ -37,6 +37,8 @@
 										<th>Subtotal</th>
 										<th>IVA</th>
 										<th>Total</th>
+										<th>Pagos</th>
+										<th>Anticipos</th>
 										<th>Concepto</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -51,6 +53,8 @@
 											<td>{{ $project->subtotal }}</td>
 											<td>{{ $project->iva }}</td>
 											<td>{{ $project->total }}</td>
+											<td>{{ $project->progresoPago }}</td>
+											<td>{{ $project->progresoAnticipo }}</td>
 											<td>{{ $project->concepto }}</td>
                                             <td>
                                                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">

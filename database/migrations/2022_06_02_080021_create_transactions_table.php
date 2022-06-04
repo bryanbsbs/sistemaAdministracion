@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->enum('metodo', ['Deposito', 'Transferencia']);
             $table->string('referencia');
+            $table->enum('tipo', ['Pago', 'Anticipo']);
             $table->timestamps();
         });
 

@@ -18,9 +18,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right">
+
                         <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                            {{ __('Crear nuevo') }}
+                            {{ __('Registrar pago') }}
                         </a>
+
                         </div>
                     </div>
 
@@ -30,29 +32,29 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>Id</th>
-										<th>Persona</th>
-										<th>Proyecto</th>
 										<th>Monto</th>
 										<th>Fecha</th>
 										<th>Metodo</th>
-										<th>Referencia</th>
+										<th>Razón social</th>
+										<th>Tipo</th>
+										<th>Nombre del proyecto</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($transactions as $transaction)
+                                    @foreach ($temporalTable as $row)
                                         <tr>
-                                            <td>{{ $transaction->id }}</td>
-											<td>{{ $transaction->person_id }}</td>
-											<td>{{ $transaction->project_id }}</td>
-											<td>{{ $transaction->monto }}</td>
-											<td>{{ $transaction->fecha }}</td>
-											<td>{{ $transaction->metodo }}</td>
-											<td>{{ $transaction->referencia }}</td>
+                                            <td>{{ $row->id }}</td>
+                                            <td>{{ $row->monto }}</td>
+                                            <td>{{ $row->fecha }}</td>
+                                            <td>{{ $row->metodo }}</td>
+                                            <td>{{ $row->razonSocial }}</td>
+                                            <td>{{ $row->tipo }}</td>
+                                            <td>{{ $row->nombre }}</td>
                                             <td>
-                                                <form action="{{ route('transactions.destroy',$transaction->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('transactions.show',$transaction->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('transactions.edit',$transaction->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('transactions.destroy',$row->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('transactions.show',$row->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('transactions.edit',$row->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>

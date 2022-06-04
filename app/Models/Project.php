@@ -18,6 +18,6 @@ class Project extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\Models\Transaction', 'project_id', 'id');
+        return $this->hasMany(Transaction::class);
     }
 }
