@@ -4,8 +4,9 @@
         <div class="mb-3">
             <label for="person_id">Persona</label>
             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="person_id" name="person_id">
+                <option value="">Seleccione una opción</option>
                 @foreach ($persons as $person)
-                    <option value="{{ $person->id }}">{{ $person->razonSocial }}</option>
+                    <option value="{{ $person->id }}" @if($transaction->person_id == $person->id) {{ 'selected' }} @endif>{{ $person->razonSocial }}</option>
                 @endforeach
             </select><br>
         </div>
@@ -13,8 +14,9 @@
         <div class="mb-3">
             <label for="project_id">Proyecto</label>
             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="project_id" name="project_id">
+                <option value="">Seleccione una opción</option>
                 @foreach ($projects as $project)
-                    <option value="{{ $project->id }}" selected>{{ $project->nombre }}</option>
+                    <option value="{{ $project->id }}" @if($transaction->project_id == $project->id) {{ 'selected' }} @endif>{{ $project->nombre }}</option>
                 @endforeach
             </select><br>
         </div>
@@ -32,7 +34,7 @@
             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="metodo" name="metodo">
                     <option value="">Selecciona una opcion</option>
                     <option value="Deposito" @if($transaction->metodo == 'Deposito') {{ 'selected' }} @endif>Deposito</option>
-                    <option value="Transaccion" @if($transaction->metodo == 'Transaccion') {{ 'selected' }} @endif>Transacción</option>
+                    <option value="Transferencia" @if($transaction->metodo == 'Transferencia') {{ 'selected' }} @endif>Transferencia</option>
             </select><br>
         </div>
         <div class="form-group">

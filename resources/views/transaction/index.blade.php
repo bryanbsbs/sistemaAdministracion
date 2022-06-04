@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Pagos')
+@section('title', 'Pagos y anticipos')
 
 @section('content_header')
-    <h1>Pagos</h1>
+    <h1>Pagos y anticipos</h1>
 @stop
 
 @section('content')
@@ -30,8 +30,8 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>Id</th>
-										<th>Person</th>
-										<th>Project</th>
+										<th>Persona</th>
+										<th>Proyecto</th>
 										<th>Monto</th>
 										<th>Fecha</th>
 										<th>Metodo</th>

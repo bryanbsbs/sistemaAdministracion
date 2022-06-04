@@ -19,12 +19,12 @@
 
                     <div class="card-body">
                         <div class="form-group">
-                            <strong>Person id:</strong>
-                            {{ $transaction->provider_id }}
+                            <strong>Persona:</strong>
+                            {{ $person->razonSocial }}
                         </div>
                         <div class="form-group">
-                            <strong>Project id:</strong>
-                            {{ $transaction->project_id }}
+                            <strong>Proyecto:</strong>
+                            {{ $project->nombre }}
                         </div>
                         <div class="form-group">
                             <strong>Monto:</strong>

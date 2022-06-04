@@ -39,14 +39,16 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::find($id);
-        return view('transaction.show', compact('transaction'));
+        $person = Person::find($transaction->person_id);
+        $project = Project::find($transaction->project_id);
+        return view('transaction.show', ['transaction' => $transaction, 'person' => $person, 'project' => $project]);
     }
 
 
     public function edit($id)
     {
-        $persons = Person::values('razonSocial');
-        $projects = Project::values('nombre');
+        $persons = Person::all();
+        $projects = Project::all();
         $transaction = Transaction::find($id);
         return view('transaction.edit', ['transaction' => $transaction,
                                 'projects' => $projects,
