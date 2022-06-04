@@ -1,10 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear anticipo')
+@section('title', 'Crear pago')
 
 @section('content_header')
-    <h1>Crear anticipo</h1>
+    <h1>Crear pago</h1>
 @stop
+
 
 @section('content')
     <section class="content container-fluid">
@@ -14,15 +15,10 @@
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Create Advance</span>
-                    </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('advances.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('transactions.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
-
-                            @include('advance.form')
-
+                            @include('transaction.form')
                         </form>
                     </div>
                 </div>

@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pays', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('provider_id')->constrained('providers');
-            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->double('monto');
             $table->date('fecha');
             $table->enum('metodo', ['Deposito', 'Transferencia']);
             $table->string('referencia');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pays');
+        Schema::dropIfExists('advances');
     }
 };

@@ -18,10 +18,14 @@ return new class extends Migration
             $table->string('nombre');
             $table->date('fechaInicio');
             $table->double('subtotal');
-            $table->double('iva');
-            $table->double('total');
             $table->string('concepto');
             $table->text('comentariosAdicionales');
+
+            $table->double('iva');
+            $table->double('total');
+            $table->double('progresoPago')->default(0);
+            $table->double('progresoAnticipo')->default(0);
+            $table->enum('estado', ['Activo', 'Inactivo'])->default('Activo');
             $table->timestamps();
         });
     }

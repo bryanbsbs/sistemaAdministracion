@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ $pay->name ?? 'Show Pay' }}
-@endsection
+@section('title', 'Detalle del pago')
+
+@section('content_header')
+    <h1>Detalle del pago</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -10,41 +12,36 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">Show Pay</span>
-                        </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('pays.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('transactions.index') }}"> Regresar</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
                         <div class="form-group">
-                            <strong>Provider Id:</strong>
-                            {{ $pay->provider_id }}
+                            <strong>Person id:</strong>
+                            {{ $transaction->provider_id }}
                         </div>
                         <div class="form-group">
-                            <strong>Project Id:</strong>
-                            {{ $pay->project_id }}
+                            <strong>Project id:</strong>
+                            {{ $transaction->project_id }}
                         </div>
                         <div class="form-group">
                             <strong>Monto:</strong>
-                            {{ $pay->monto }}
+                            {{ $transaction->monto }}
                         </div>
                         <div class="form-group">
                             <strong>Fecha:</strong>
-                            {{ $pay->fecha }}
+                            {{ $transaction->fecha }}
                         </div>
                         <div class="form-group">
                             <strong>Metodo:</strong>
-                            {{ $pay->metodo }}
+                            {{ $transaction->metodo }}
                         </div>
                         <div class="form-group">
                             <strong>Referencia:</strong>
-                            {{ $pay->referencia }}
+                            {{ $transaction->referencia }}
                         </div>
-
                     </div>
                 </div>
             </div>

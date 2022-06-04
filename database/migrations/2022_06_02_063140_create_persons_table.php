@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('advances', function (Blueprint $table) {
+        Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('costumer_id')->constrained('costumers');
-            $table->foreignId('project_id')->constrained('projects');
-            $table->double('monto');
-            $table->date('fecha');
-            $table->enum('metodo', ['Deposito', 'Transferencia']);
-            $table->string('referencia');
+            $table->string('razonSocial');
+            $table->enum('persona', ['Fisica', 'Moral']);
+            $table->string('rfc');
+            $table->string('domicilio');
+            $table->string('email');
+            $table->string('telefono');
+            $table->enum('tipo', ['Cliente', 'Proveedor']);
             $table->timestamps();
         });
-
     }
 
     /**
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advances');
+        Schema::dropIfExists('providers');
     }
 };

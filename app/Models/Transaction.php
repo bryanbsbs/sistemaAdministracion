@@ -22,11 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Pay extends Model
+class Transaction extends Model
 {
-    
+
     static $rules = [
-		'provider_id' => 'required',
+		'person_id' => 'required',
 		'project_id' => 'required',
 		'monto' => 'required',
 		'fecha' => 'required',
@@ -34,31 +34,17 @@ class Pay extends Model
 		'referencia' => 'required',
     ];
 
-    protected $perPage = 20;
+    protected $table = 'transaction';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['provider_id','project_id','monto','fecha','metodo','referencia'];
+    protected $fillable = ['person_id','project_id','monto','fecha','metodo','referencia'];
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function project()
     {
         return $this->hasOne('App\Models\Project', 'id', 'project_id');
     }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function provider()
-    {
-        return $this->hasOne('App\Models\Provider', 'id', 'provider_id');
-    }
-    
 
+    public function person()
+    {
+        return $this->hasOne('App\Models\Person', 'id', 'person_id');
+    }
 }

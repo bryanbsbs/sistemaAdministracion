@@ -5,108 +5,62 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
-/**
- * Class ProjectController
- * @package App\Http\Controllers
- */
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $projects = Project::paginate();
-
+        $projects = Project::get();
         return view('project.index', compact('projects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $project = new Project();
         return view('project.create', compact('project'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        $subtotal = request()->subtotal;
-        $iva = doubleval($subtotal) * 0.16;
-        $total = $iva + doubleval($subtotal);
-
         request()->validate(Project::$rules);
-
-        $project = Project::create($request->all() + ['iva' => $iva, 'total' => $total]);
-
+        $subtotal = request()->subtotal;
+        $subtotal = doubleval($subtotal);
+        $iva = $subtotal * 0.16;
+        $total = $iva + $subtotal;
+        Project::create($request->all() + ['iva' => $iva, 'total' => $total]);
         return redirect()->route('projects.index')
-            ->with('success', 'Project created successfully.');
+            ->with('success', 'Proyecto creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $project = Project::find($id);
-
         return view('project.show', compact('project'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $project = Project::find($id);
-
         return view('project.edit', compact('project'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Project $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Project $project)
     {
         request()->validate(Project::$rules);
-
         $project->update($request->all());
-
         return redirect()->route('projects.index')
-            ->with('success', 'Project updated successfully');
+            ->with('success', 'Proyecto actualizado correctamente.');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+
     public function destroy($id)
     {
-        $project = Project::find($id)->delete();
-
+        Project::find($id)->delete();
         return redirect()->route('projects.index')
-            ->with('success', 'Project deleted successfully');
+            ->with('success', 'Proyecto borrado correctamente.');
     }
 }

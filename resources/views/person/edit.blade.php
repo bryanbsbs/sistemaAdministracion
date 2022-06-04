@@ -1,10 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar cliente')
+@section('title', 'Editar')
 
 @section('content_header')
-    <h1>Editar cliente</h1>
+    <h1>Editar</h1>
 @stop
+
 
 @section('content')
     <section class="content container-fluid">
@@ -15,10 +16,10 @@
 
                 <div class="card card-default">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('costumers.update', $costumer->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('persons.update', $person->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
-                            @include('costumer.form')
+                            @include('person.form')
                         </form>
                     </div>
                 </div>
