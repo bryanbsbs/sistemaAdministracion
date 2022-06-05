@@ -116,85 +116,74 @@ class TransactionController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function update(Request $request, Transaction $transaction)
     {
         request()->validate(Transaction::$rules);
 
-        $oldMonto = $transaction->monto;
+        $oldMonto = $transaction->monto; //Monto anterior
         $project = Project::find($request->project_id);
         $person = Person::find($request->person_id);
 
         if($person->tipo == 'Cliente') {
-            if(($project->progresoAnticipo + $transaction->monto) <= $project->total){
 
-                $project->progresoAnticipo -= $oldMonto;
+            $project->progresoAnticipo -= $oldMonto;
+            $project->progresoAnticipo += $request->monto;
 
-                if(($project->progresoAnticipo + $transaction->monto) == $project->total) {
-                    $project->progresoAnticipo += $transaction->monto;
+            if($project->progresoAnticipo <= $project->total){
+                $project->estado = 'Activo';
 
-                    if(($project->progresoAnticipo == $project->total)&&($project->progresoPago == $project->total)) {
-                        $project->estado = 'Inactivo';
-                    }
-
-                    $project->save();
-                    return redirect()->route('transactions.index')
-                    ->with('success', 'Se ha terminado de pagar el proyecto.');
+                if(($project->progresoAnticipo == $project->total)&&($project->progresoPago == $project->total)) {
+                    $project->estado = 'Inactivo';
                 }
 
-                $project->progresoAnticipo += $request->monto;
                 $project->save();
+                $transaction->update($request->all());
+                return redirect()->route('transactions.index')
+                ->with('success', 'Se ha terminado de pagar el proyecto.');
             }
-        } else {
+            $project->save();
 
+        } else {
+            $project->progresoPago -= $oldMonto;//Resetear al valor antes del monto anterior
+            $project->progresoPago += $request->monto;
+            //Si progresoPago+monto es menor o igual al total
+            if($project->progresoPago <= $project->total) {
+                $project->estado = 'Activo';
+
+                if(($project->progresoPago == $project->total)&&($project->progresoAnticipo == $project->total)) {
+                    //Proyecto inactivo
+                    $project->estado = 'Inactivo';
+                }
+
+                $project->save();
+                $transaction->update($request->all());
+                return redirect()->route('transactions.index')
+                ->with('success', 'Se ha terminado de pagar el proyecto.');
+            }
+            $project->save();
         }
+
         $transaction->update($request->all());
         return redirect()->route('transactions.index')
             ->with('success', 'Transacción actualizada correctamente');
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function destroy($id)
     {
-        Transaction::find($id)->delete();
+        $transaction = Transaction::find($id);
+        $project = Project::find($transaction->project_id);
+        $person = Person::find($transaction->person_id);
+
+        if($person->tipo == 'Cliente') {
+            $project->progresoAnticipo -= $transaction->monto;
+        } else {
+            $project->progresoPago -= $transaction->monto;
+        }
+
+        $project->estado = 'Activo';
+        $project->save();
+        $transaction->delete();
         return redirect()->route('transactions.index')
             ->with('success', 'Transacción eliminada correctamente');
     }
