@@ -8,7 +8,7 @@
 
         <div class="mb-3">
             <label for="persona">Persona</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="persona" name="persona">
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="persona" name="persona" required>
                 <option value="">Seleccione una opcion</option>
                 <option value="Fisica" @if ($person->persona == "Fisica") {{ "selected" }} @endif>Fisica</option>
                 <option value="Moral" @if ($person->persona == "Moral") {{ "selected" }} @endif>Moral</option>
@@ -37,7 +37,7 @@
 
         <div class="mb-3">
             <label for="tipo">Tipo</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="tipo" name="tipo">
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" id="tipo" name="tipo" required>
                 <option value="">Seleccione una opcion</option>
                 <option value="Cliente" @if ($person->tipo == "Cliente") {{ "selected" }} @endif>Cliente</option>
                 <option value="Proveedor" @if ($person->tipo == "Proveedor") {{ "selected" }} @endif>Proveedor</option>

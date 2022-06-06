@@ -14,10 +14,10 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::get();
 
-        $temporalTable = DB::table('transaction')
-        ->join('persons', 'persons.id', '=', 'transaction.person_id')
-        ->join('projects','projects.id', '=', 'transaction.project_id')
-        ->select('transaction.id', 'transaction.monto', 'transaction.fecha', 'transaction.metodo', 'persons.razonSocial', 'persons.tipo', 'projects.nombre')
+        $temporalTable = DB::table('transactions')
+        ->join('persons', 'persons.id', '=', 'transactions.person_id')
+        ->join('projects','projects.id', '=', 'transactions.project_id')
+        ->select('transactions.id', 'transactions.monto', 'transactions.fecha', 'transactions.metodo', 'persons.razonSocial', 'persons.tipo', 'projects.nombre')
         ->get();
         return view('transaction.index', ['temporalTable' => $temporalTable]);
     }
@@ -120,7 +120,7 @@ class TransactionController extends Controller
     {
         request()->validate(Transaction::$rules);
 
-        $oldMonto = $transaction->monto; //Monto anterior
+        $oldMonto = $transaction->monto;
         $project = Project::find($request->project_id);
         $person = Person::find($request->person_id);
 
@@ -144,14 +144,13 @@ class TransactionController extends Controller
             $project->save();
 
         } else {
-            $project->progresoPago -= $oldMonto;//Resetear al valor antes del monto anterior
+            $project->progresoPago -= $oldMonto;
             $project->progresoPago += $request->monto;
-            //Si progresoPago+monto es menor o igual al total
+
             if($project->progresoPago <= $project->total) {
                 $project->estado = 'Activo';
 
                 if(($project->progresoPago == $project->total)&&($project->progresoAnticipo == $project->total)) {
-                    //Proyecto inactivo
                     $project->estado = 'Inactivo';
                 }
 

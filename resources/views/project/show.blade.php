@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
 @section('title')
-    {{ $project->name ?? 'Detalles del proyecto' }}
+    {{ $project->nombre ?? 'Detalles del proyecto' }}
 @stop
 
 @section('content_header')
-    <h1>{{ $project->name ?? 'Detalles del proyecto' }}</h1>
+    <h1>{{ $project->nombre ?? 'Detalles del proyecto' }}</h1>
 @stop
 
 @section('content')

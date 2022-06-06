@@ -2,6 +2,12 @@
 
 @section('title', 'Proyectos')
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
+@stop
+
 @section('content_header')
     <h1>Proyectos</h1>
 @stop
@@ -27,7 +33,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id="projects"> 
                                 <thead class="thead">
                                     <tr>
                                         <th>Id</th>
@@ -39,7 +45,6 @@
 										<th>Total</th>
 										<th>Pagos</th>
 										<th>Anticipos</th>
-										<th>Concepto</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -55,7 +60,6 @@
 											<td>{{ $project->total }}</td>
 											<td>{{ $project->progresoPago }}</td>
 											<td>{{ $project->progresoAnticipo }}</td>
-											<td>{{ $project->concepto }}</td>
                                             <td>
                                                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('projects.show',$project->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
@@ -75,3 +79,16 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>    
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>    
+    <script>
+        $('#projects').DataTable({
+            responsive: true, 
+            autoWidth: false
+        });
+    </script>
+@stop

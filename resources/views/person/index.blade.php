@@ -2,6 +2,12 @@
 
 @section('title', 'Clientes y proveedores')
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
+@stop
+
 @section('content_header')
     <h1>Clientes y proveedores</h1>
 @stop
@@ -27,15 +33,13 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id="persons">
                                 <thead class="thead">
                                     <tr>
                                         <th>Id</th>
 										<th>Razón social</th>
 										<th>Tipo</th>
 										<th>Persona</th>
-										<th>RFC</th>
-										<th>Domicilio</th>
 										<th>Email</th>
 										<th>Telefono</th>
                                         <th>Opciones</th>
@@ -48,8 +52,6 @@
 											<td>{{ $person->razonSocial }}</td>
 											<td>{{ $person->tipo }}</td>
 											<td>{{ $person->persona }}</td>
-											<td>{{ $person->rfc }}</td>
-											<td>{{ $person->domicilio }}</td>
 											<td>{{ $person->email }}</td>
 											<td>{{ $person->telefono }}</td>
                                             <td>
@@ -72,3 +74,17 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>    
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>    
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>    
+    <script>
+        $('#persons').DataTable({
+            responsive: true, 
+            autoWidth: false
+        });
+    </script>
+@stop
+

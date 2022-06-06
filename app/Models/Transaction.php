@@ -16,7 +16,7 @@ class Transaction extends Model
 		'referencia' => 'required',
     ];
 
-    protected $table = 'transaction';
+    protected $table = 'transactions';
 
     protected $fillable = ['person_id','project_id','monto','fecha','metodo','referencia'];
 
