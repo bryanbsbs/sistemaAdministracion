@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->enum('tipo', ['Cliente', 'Proveedor']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

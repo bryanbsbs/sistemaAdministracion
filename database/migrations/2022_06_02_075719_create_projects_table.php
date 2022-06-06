@@ -27,6 +27,7 @@ return new class extends Migration
             $table->double('progresoAnticipo')->default(0);
             $table->enum('estado', ['Activo', 'Inactivo'])->default('Activo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('referencia');
             $table->enum('tipo', ['Pago', 'Anticipo']);
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }
