@@ -14,9 +14,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right">
-                            <a href="{{ route('projects.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                {{ __('Crear nuevo') }}
-                            </a>
+                            @can('projects.create')
+                                <a href="{{ route('projects.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                    {{ __('Crear nuevo') }}
+                                </a>
+                            @endcan
                         </div>
                     </div>
 
@@ -51,8 +53,12 @@
 											<td>{{ $project->progresoAnticipo }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-primary " href="{{ route('projects.show',$project->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('projects.edit',$project->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a> @csrf
-                                                <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $project->id }}"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                @can('projects.edit')
+                                                    <a class="btn btn-sm btn-success" href="{{ route('projects.edit',$project->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a> @csrf
+                                                @endcan
+                                                @can('projects.destroy')
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $project->id }}"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

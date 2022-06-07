@@ -14,10 +14,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right">
-
-                        <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                            {{ __('Registrar pago') }}
-                        </a>
+                        @can('transactions.create')
+                            <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                {{ __('Registrar pago') }}
+                            </a>
+                        @endcan
 
                         </div>
                     </div>
@@ -49,8 +50,12 @@
                                             <td>{{ $row->nombre }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-primary " href="{{ route('transactions.show',$row->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('transactions.edit',$row->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                                <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $row->id }}"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                @can('transactions.edit')
+                                                    <a class="btn btn-sm btn-success" href="{{ route('transactions.edit',$row->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                @endcan
+                                                @can('transactions.destroy')
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $row->id }}"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:transactions.index')->only('index');
+        $this->middleware('can:transactions.create')->only('create', 'store');
+        $this->middleware('can:transactions.edit')->only('edit', 'update');
+        $this->middleware('can:transactions.show')->only('show');
+        $this->middleware('can:transactions.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $temporalTable = DB::table('transactions')
@@ -57,7 +67,7 @@ class TransactionController extends Controller
                     }
 
                     $project->save();
-                    $transaction->save();
+                    Transaction::create($transaction);
 
                     return redirect()->route('transactions.index')
                     ->with('success', 'Se ha terminado de pagar el proyecto.');
@@ -80,7 +90,7 @@ class TransactionController extends Controller
                     }
 
                     $project->save();
-                    $transaction->save();
+                    Transaction::create($transaction);
 
                     return redirect()->route('transactions.index')
                         ->with('success', 'Con esta ultima transaccion se ha terminado de pagar al proveedor');
@@ -93,14 +103,14 @@ class TransactionController extends Controller
         }
 
         $project->save();
-        $transaction->save();
+        Transaction::create($transaction);
 
         return redirect()->route('transactions.index')
             ->with('success', 'Transaccion creada correctamente.');
     }
 
 
-    public function show(Transaction $transaction )
+    public function show(Transaction $transaction)
     {
         $person = Person::find($transaction->person_id);
         $project = Project::find($transaction->project_id);

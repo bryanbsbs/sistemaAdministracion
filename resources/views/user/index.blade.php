@@ -1,9 +1,9 @@
 @extends('layouts.general_index')
 
-@section('title', 'Clientes y proveedores')
+@section('title', 'Usuarios')
 
 @section('content_header')
-    <h1>Clientes y proveedores</h1>
+    <h1>Usuarios</h1>
 @stop
 
 @section('content')
@@ -14,11 +14,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right">
-                            @can('persons.create')
-                                <a href="{{ route('persons.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
-                                    {{ __('Crear nuevo') }}
-                                </a>
-                            @endcan
+                            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                {{ __('Crear nuevo') }}
+                            </a>
                         </div>
                     </div>
 
@@ -28,31 +26,21 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>Id</th>
-										<th>Razón social</th>
-										<th>Tipo</th>
-										<th>Persona</th>
+										<th>Nombre</th>
 										<th>Email</th>
-										<th>Telefono</th>
-                                        <th>Opciones</th>
+										<th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($persons as $person)
+                                    @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $person->id }}</td>
-											<td>{{ $person->razonSocial }}</td>
-											<td>{{ $person->tipo }}</td>
-											<td>{{ $person->persona }}</td>
-											<td>{{ $person->email }}</td>
-											<td>{{ $person->telefono }}</td>
+                                            <td>{{ $user->id }}</td>
+											<td>{{ $user->name }}</td>
+											<td>{{ $user->email }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-primary" href="{{ route('persons.show',$person->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                @can('persons.edit')
-                                                    <a class="btn btn-sm btn-success" href="{{ route('persons.edit',$person->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                                @endcan
-                                                @can('persons.destroy')
-                                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $person->id }}"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                @endcan
+                                                <a class="btn btn-sm btn-primary" href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $user->id }}"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -71,7 +59,7 @@
           <div class="modal-content">
 
             <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel">Eliminar Persona</h5>
+              <h5 class="modal-title" id="modalLabel">Eliminar usera</h5>
               <button type="button" class="close" data-bs-dismiss="modal">&times</button>
             </div>
 
@@ -81,7 +69,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <form id="formDelete" action="{{ route('persons.destroy', 0) }}" method="POST">
+              <form id="formDelete" action="{{ route('users.destroy', 0) }}" method="POST">
                 @csrf
                 @method("DELETE")
                 <button class="btn btn-danger" type="submit">Eliminar</button>

@@ -242,18 +242,27 @@ return [
             'text' => 'Pagos y anticipos',
             'route'  => 'transactions.index',
             'icon' => 'fas fa-fw fa-coins',
+            'can' => 'transactions.index'
         ],
         ['header' => 'GESTIÓN DE LOS PROYECTOS'],
         [
             'text' => 'Proyectos',
             'route'  => 'projects.index',
             'icon' => 'fas fa-fw fa-hammer',
+            'can' => 'projects.index'
         ],
         ['header' => 'PERSONAS'],
         [
             'text' => 'Clientes y proveedores',
             'route'  => 'persons.index',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'persons.index'
+        ],
+        [
+            'text' => 'Usuarios',
+            'route'  => 'users.index',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'users.index'
         ],
         ['header' => 'labels'],
         [

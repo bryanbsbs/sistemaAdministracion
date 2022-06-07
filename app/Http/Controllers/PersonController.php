@@ -11,6 +11,11 @@ class PersonController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:persons.index')->only('index');
+        $this->middleware('can:persons.create')->only('create', 'store');
+        $this->middleware('can:persons.edit')->only('edit', 'update');
+        $this->middleware('can:persons.show')->only('show');
+        $this->middleware('can:persons.destroy')->only('destroy');
     }
 
     public function index()
