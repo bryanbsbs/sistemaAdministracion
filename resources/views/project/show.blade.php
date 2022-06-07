@@ -20,7 +20,10 @@
                     </div>
 
                     <div class="card-body">
-
+                        <div class="form-group">
+                            <strong>Id:</strong>
+                            {{ $project->id }}
+                        </div>
                         <div class="form-group">
                             <strong>Nombre:</strong>
                             {{ $project->nombre }}

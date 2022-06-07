@@ -8,6 +8,8 @@
 
 
 @section('content')
+    @include('fragments.validation-errors')
+    @include('fragments.sesion')
     <section class="content container-fluid">
         <div class="">
             <div class="col-md-12">

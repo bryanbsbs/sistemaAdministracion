@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePersonRequest;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class PersonController extends Controller
     public function index()
     {
         $persons = Person::get();
+
         return view('person.index', compact('persons'));
     }
 
@@ -22,14 +24,15 @@ class PersonController extends Controller
     public function create()
     {
         $person = new Person();
+
         return view('person.create', compact('person'));
     }
 
 
-    public function store(Request $request)
+    public function store(StorePersonRequest $request)
     {
-        request()->validate(Person::$rules);
-        Person::create($request->all());
+        Person::create($request->validated());
+
         return redirect()->route('persons.index')
             ->with('success', 'Persona añadida correctamente.');
     }
@@ -41,25 +44,25 @@ class PersonController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Person $person)
     {
-        $person = Person::find($id);
         return view('person.edit', compact('person'));
     }
 
 
-    public function update(Request $request, Person $person)
+    public function update(StorePersonRequest $request, Person $person)
     {
-        request()->validate(Person::$rules);
-        $person->update($request->all());
+        $person->update($request->validated());
+
         return redirect()->route('persons.index')
             ->with('success', 'Persona actualizada correctamente.');
     }
 
 
-    public function destroy($id)
+    public function destroy(Person $person)
     {
-        Person::find($id)->delete();
+        $person->delete();
+
         return redirect()->route('persons.index')
             ->with('success', 'Persona eliminada correctamente.');
     }

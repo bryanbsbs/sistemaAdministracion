@@ -22,6 +22,10 @@
                     <div class="card-body">
 
                         <div class="form-group">
+                            <strong>Id:</strong>
+                            {{ $person->id }}
+                        </div>
+                        <div class="form-group">
                             <strong>Razón social:</strong>
                             {{ $person->razonSocial }}
                         </div>

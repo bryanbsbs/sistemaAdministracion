@@ -19,8 +19,16 @@
 
                     <div class="card-body">
                         <div class="form-group">
-                            <strong>Persona:</strong>
+                            <strong>Id del pago:</strong>
+                            {{ $person->id }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Persona que hizo la transacción:</strong>
                             {{ $person->razonSocial }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Tipo de persona:</strong>
+                            {{ $person->tipo }}
                         </div>
                         <div class="form-group">
                             <strong>Proyecto:</strong>

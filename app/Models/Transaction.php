@@ -11,15 +11,6 @@ class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
-    static $rules = [
-		'person_id' => 'required',
-		'project_id' => 'required',
-		'monto' => 'required',
-		'fecha' => 'required',
-		'metodo' => 'required',
-		'referencia' => 'required',
-    ];
-
     protected $table = 'transactions';
 
     protected $fillable = ['person_id','project_id','monto','fecha','metodo','referencia'];

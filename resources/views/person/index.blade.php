@@ -2,18 +2,12 @@
 
 @section('title', 'Clientes y proveedores')
 
-@section('content_header') 
+@section('content_header')
     <h1>Clientes y proveedores</h1>
 @stop
 
 @section('content')
-
-@if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
+    @include('fragments.sesion')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -69,16 +63,16 @@
     <div class="modal fade" id="deleteModal" role="dialog" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-  
+
             <div class="modal-header">
               <h5 class="modal-title" id="modalLabel">Eliminar Persona</h5>
               <button type="button" class="close" data-bs-dismiss="modal">&times</button>
             </div>
-  
+
             <div class="modal-body">
               <p>Si borras este registro tambien se borraran todos los pagos o anticipos relacionados con el. ¿Estas seguro de eliminarlo?</p>
             </div>
-  
+
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               <form id="formDelete" action="{{ route('persons.destroy', 0) }}" method="POST">
@@ -87,10 +81,10 @@
                 <button class="btn btn-danger" type="submit">Eliminar</button>
               </form>
             </div>
-  
+
           </div>
         </div>
-      </div>  
+      </div>
 
       <script>
         var deleteModal = document.getElementById('deleteModal')

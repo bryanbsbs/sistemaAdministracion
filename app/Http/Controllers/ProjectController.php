@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::get();
+
         return view('project.index', compact('projects'));
     }
 
@@ -22,49 +24,56 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
+
         return view('project.create', compact('project'));
     }
 
 
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        request()->validate(Project::$rules);
-        $subtotal = request()->subtotal;
+        $request->validated();
+        $subtotal = $request->subtotal;
         $subtotal = doubleval($subtotal);
         $iva = $subtotal * 0.16;
         $total = $iva + $subtotal;
+
         Project::create($request->all() + ['iva' => $iva, 'total' => $total]);
+
         return redirect()->route('projects.index')
             ->with('success', 'Proyecto creado exitosamente.');
     }
 
 
-    public function show($id)
+    public function show(Project $project)
     {
-        $project = Project::find($id);
-        return view('project.show', compact('project'));
+        return view('project.show', [
+            'project' => $project
+        ]);
     }
 
 
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::find($id);
-        return view('project.edit', compact('project'));
+        return view('project.edit', [
+            'project' => $project
+        ]);
     }
 
 
-    public function update(Request $request, Project $project)
+    public function update(StoreProjectRequest $request, Project $project)
     {
-        request()->validate(Project::$rules);
+        $request->validated();
         $project->update($request->all());
+
         return redirect()->route('projects.index')
             ->with('success', 'Proyecto actualizado correctamente.');
     }
 
 
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        Project::find($id)->delete();
+        $project->delete();
+
         return redirect()->route('projects.index')
             ->with('success', 'Proyecto borrado correctamente.');
     }
